@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Boo Boo Special</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: #ffe6f0;
+      overflow-x: hidden;
+    }
+
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .question-box {
+      background: white;
+      padding: 30px 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 0.5s ease;
+    }
+
+    button {
+      background: #ff6699;
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      margin: 10px 5px;
+      font-size: 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: #ff3366;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .message {
+      font-size: 18px;
+      color: #d6336c;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: url('https://i.imgur.com/Z8N9ZcN.png') no-repeat center/contain;
+      animation: float 5s linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-800px) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .final {
+      text-align: center;
+      padding: 30px 15px;
+    }
+
+    .final img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 20px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 480px) {
+      .message {
+        font-size: 16px;
+      }
+
+      button {
+        padding: 10px 18px;
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="center">
+  <div class="question-box" id="step1">
+    <p>Do you love me? ??</p>
+    <button onclick="yesClicked()">Yes</button>
+    <button onclick="noClicked()">No</button>
+  </div>
+
+  <div class="question-box hidden" id="step2">
+    <p>Think twice? ??</p>
+    <button onclick="yesClicked()">Yes</button>
+    <button onclick="noClickedAgain()">No</button>
+  </div>
+
+  <div class="question-box hidden" id="step3">
+    <p>Kalesh hojaega sochlo? ??</p>
+    <button onclick="yesClicked()">Yes</button>
+  </div>
+
+  <div class="question-box hidden" id="final">
+    <div class="final">
+      <h2>awwww i loveee youu tooo boo booo!! ??</h2>
+      <p class="message">
+        And I will always love you!! You are the most special person to me and I will never leave your side ??<br><br>
+        Since maine bhot time se koi special chizein nahi kari thi and since you deserve this,<br>
+        so ek choti si chiz meri taraf se...<br><br>
+        Yaya i love youu!! ??
+      </p>
+      <img src="yay.jpg" alt="Cute Cat">
+    </div>
+  </div>
+</div>
+
+<div class="hearts" id="hearts"></div>
+
+<script>
+  const step1 = document.getElementById('step1');
+  const step2 = document.getElementById('step2');
+  const step3 = document.getElementById('step3');
+  const final = document.getElementById('final');
+  const heartsContainer = document.getElementById('hearts');
+
+  function yesClicked() {
+    step1.classList.add('hidden');
+    step2.classList.add('hidden');
+    step3.classList.add('hidden');
+    final.classList.remove('hidden');
+    startHearts();
+  }
+
+  function noClicked() {
+    step1.classList.add('hidden');
+    step2.classList.remove('hidden');
+  }
+
+  function noClickedAgain() {
+    step2.classList.add('hidden');
+    step3.classList.remove('hidden');
+  }
+
+  function startHearts() {
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.top = '100vh';
+      heart.style.animationDuration = (3 + Math.random() * 2) + 's';
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }, 200);
+  }
+</script>
+
+</body>
+</html>
